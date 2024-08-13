@@ -1,0 +1,25 @@
+import tkinter as tk
+from tkinter import ttk
+import library_managment
+
+root = tk.Tk()
+root.geometry("1000x500")
+root.columnconfigure(0, weight=1)
+frame = ttk.Frame(root).grid(row=0, column=0)
+text_name = ttk.Label(frame, text="Enter your name")
+text_name.grid(row=0, column=0)
+name = tk.StringVar()
+name_input = ttk.Entry(frame, textvariable=name)
+name_input.grid(row=0, column=1)
+text_pass = ttk.Label(frame, text="Enter your password")
+text_pass.grid(row=1, column=0)
+password = tk.StringVar()
+pass_input = ttk.Entry(frame, textvariable=password)
+pass_input.grid(row=1, column=1)
+btn_frame = ttk.Frame(root)
+btn_frame.grid(row=2, column=0)
+btn_login = ttk.Button(btn_frame, text="Login")
+btn_login.grid(row=2, column=0)
+btn_register = ttk.Button(btn_frame, text="register")
+btn_register.grid(row=2, column=1)
+root.mainloop()

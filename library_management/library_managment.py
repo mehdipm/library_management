@@ -16,13 +16,14 @@ class Book:
                f"Borrowed: {borrowed_status}")
     
 class User:
-    def __init__(self, user_id, name, email):
+    def __init__(self, user_id, name, email, password):
         self.user_id = user_id
         self.name = name
+        self.password = password
         self.email = email
 
     def __str__(self):
-        return f"User Id: {self.user_id}, Name: {self.name}, Email: {self.email}"
+        return f"User Id: {self.user_id}, Name: {self.name}, Email: {self.email}, Password: {self.password}"
 
 
 class Library:
