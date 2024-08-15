@@ -1,12 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
 from library_managment import Book, User, Library
-from data import users
+from data import users, books
 import uuid
 
 
 manager = Library()
-
 
 for user in users:
     id = uuid.uuid4()
@@ -15,6 +14,14 @@ for user in users:
     email = user[name]["email"]
     password = user[name]["password"]
     manager.users[id] = User(id, name, email, password)
+
+for book in books:
+    title = book.keys()
+    author = book[title]
+    id = uuid.uuid4()
+    manager.books.append(Book(title, author, id))
+
+
     
 # clear login frame
 def clear():

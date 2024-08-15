@@ -6,3 +6,11 @@ users = [
         }
     }
 ]
+
+books = [
+    {
+        "5 AM club":{
+            "author": "robin sharma"
+        }
+    }
+]
