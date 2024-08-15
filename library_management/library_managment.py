@@ -25,6 +25,7 @@ class User:
     def __str__(self):
         return f"User Id: {self.user_id}, Name: {self.name}, Email: {self.email}, Password: {self.password}"
 
+    
 
 class Library:
     def __init__(self):
@@ -77,6 +78,18 @@ class Library:
             return
         self.users[user.user_id] = user
         print(f"User {user.name} added with ID {user.user_id}.")
+
+    def verify_user(self, input_name, input_password):
+        for id,user in self.users.items():
+            if not user.name == input_name:
+                print("not exist")
+                return False
+            if user.password == input_password:
+                return True
+            else:
+                print("wrong pass")
+                return False
+
     
     def list_users(self):
         if not self.users:
@@ -103,17 +116,17 @@ class Library:
         else:
             print('user not found')
 
-book1 = Book("Python Crash Course", "Eric Matthes", uuid.uuid4())
+# book1 = Book("Python Crash Course", "Eric Matthes", uuid.uuid4())
 # book2 = Book("Automate the boring stuff with python", "Al swetgart", "1593279922")
 # book3 = Book("Effective Java", "Joshua Bloch", "0134685997")
 # book4 = Book("The pragmatic programmer", "Andrew Hunt and David thomas", "0135957052")
 
-print(book1)
+# print(book1)
 
 
-library = Library()
+# library = Library()
 
-library.add_book(book1)
+# library.add_book(book1)
 # library.add_book(book2)
 # library.add_book(book3)
 # library.add_book(book4)
@@ -122,7 +135,7 @@ library.add_book(book1)
 # library.add_user(User("001", "mehdi", "mehdip.m909@gmail.com"))
 # library.add_user(User("002", "hamed", "hamed@gmail.com"))
 
-library.list_users()
+# library.list_users()
 
 # library.update_user("002", "Fazel", "fazel@gmail.com")
 
