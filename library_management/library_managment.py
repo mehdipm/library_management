@@ -21,6 +21,7 @@ class User:
         self.name = name
         self.password = password
         self.email = email
+        self.borrowed_books = []
 
     def __str__(self):
         return f"User Id: {self.user_id}, Name: {self.name}, Email: {self.email}, Password: {self.password}"
@@ -51,8 +52,9 @@ class Library:
             if book.uni_id == uni_id and not book.is_borrowed:
                 book.is_borrowed = True
                 book.borrowed_by = user_id
+                self.users[user_id].borrowed_books.append(book.uni_id)
                 print(f"User {self.users[user_id].name} has borrowed {book.title}.")
-                return
+                return 
         print("Book not available")
 
     # def borrow_book(self, uni_id):
