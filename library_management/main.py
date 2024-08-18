@@ -26,7 +26,7 @@ for book in books:
     
 # clear login frame
 def clear():
-    widgets = root.grid_slaves()
+    widgets = root.winfo_children()
     for item in widgets:
         item.destroy()
     
