@@ -92,6 +92,13 @@ class Library:
                 print("wrong pass")
                 return False
 
+    def is_exist(self, user_input):
+        for book in self.books:
+            if user_input.get() == book.title:
+                return True
+            else:
+                return False
+
     
     def list_users(self):
         if not self.users:
