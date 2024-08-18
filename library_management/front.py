@@ -35,7 +35,7 @@ class Window(tk.Tk):
         log_in_frame = UserLoginFrame(container, self)
         log_in_frame.grid(row=0, column=0)
 
-        main_frame = MainView(container)
+        main_frame = MainView(container, self)
         main_frame.grid(row=0, column=0)
         main_frame.columnconfigure(0, weight=1)
 
@@ -51,6 +51,10 @@ class Window(tk.Tk):
             login_frame.destroy()
             frame = self.frames[container]
             frame.tkraise()
+            for id in manager.users:
+                user = manager.users[id]
+                if user.name == u_name.get():
+                    self.id = id
         else:
             print("wrong pass or there is not user")
             return
@@ -78,13 +82,34 @@ class UserLoginFrame(ttk.Frame):
 
 
 class MainView(ttk.Frame):
-    def __init__(self, container):
+    def __init__(self, container, controller):
         super().__init__(container)
+        self.controller = controller
         self.search_text = tk.StringVar()
-        search_btn = ttk.Button(self, text="search", )
+        search_btn = ttk.Button(self, text="search", command=self.search)
         search_btn.grid(row=0, column=0)
         search_input = ttk.Entry(self, textvariable=self.search_text)
         search_input.grid(row=0, column=1)
+        return_btn = ttk.Button(self, text="return", command=self.return_book)
+        return_btn.grid(row=2, column=0)
+        return_text = tk.StringVar()
+        self.return_text = return_text
+        return_entry = ttk.Entry(self, textvariable=return_text)
+        return_entry.grid(row=2, column=1)
+
+    def search(self):
+        if manager.is_exist(self.search_text):
+            for book in manager.books:
+                if book.title == self.search_text.get():
+                    book_id = book.uni_id
+            borrow_btn = ttk.Button(self, text="borrow", command=lambda:manager.borrow_book(book_id,self.controller.id))
+            borrow_btn.grid(row=1, column=0, sticky="EW")
+
+    def return_book(self):
+        for book in manager.books:
+            if book.title == self.return_text.get():
+                manager.return_book(book.uni_id, self.controller.id)
+
 
 window = Window()
 window.mainloop()
