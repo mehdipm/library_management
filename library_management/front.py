@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from library_managment import Book, User, Library
+from library_management import Book, User, Library
 from data import users, books
 import uuid
 
@@ -37,28 +37,18 @@ class Window(tk.Tk):
 
         main_frame = MainView(container)
         main_frame.grid(row=0, column=0)
+        main_frame.columnconfigure(0, weight=1)
+
+        log_in_frame.tkraise()
 
         self.frames[UserLoginFrame] = log_in_frame
         self.frames[MainView] = main_frame
-
-
-    # def check(self):
-    #         if manager.verify_user(self.name.get(), self.password.get()):
-                
-    #             method.clear()
-    #             for key, value in manager.users.items():
-    #                 if value.name == self.name.get():
-    #                     global entered_id
-    #                     entered_id = key
-    #             main_view()
-                # for book in manager.books:
-                #     if book.title == book_given.get():
-                #         id = book.uni_id
-                # show_return_book()
-                
+        
             
-    def show_frame(self, container, name, password):
-        if manager.verify_user(name.get(), password.get()):
+    def show_frame(self, container, u_name, u_password):
+        if manager.verify_user(u_name.get(), u_password.get()):
+            login_frame = self.frames[UserLoginFrame]
+            login_frame.destroy()
             frame = self.frames[container]
             frame.tkraise()
         else:
@@ -75,20 +65,16 @@ class UserLoginFrame(ttk.Frame):
 
         text_name = ttk.Label(self, text="Enter your name")
         text_name.grid(row=0, column=0)
-        name_input = ttk.Entry(self, textvariable=name)
+        name_input = ttk.Entry(self, textvariable=self.name)
         name_input.grid(row=0, column=1)
         text_pass = ttk.Label(self, text="Enter your password")
         text_pass.grid(row=1, column=0)
-        pass_input = ttk.Entry(self, textvariable=password)
+        pass_input = ttk.Entry(self, textvariable=self.password)
         pass_input.grid(row=1, column=1)
         btn_login = ttk.Button(self, text="Login", command =lambda: controller.show_frame(MainView, self.name, self.password))
         btn_login.grid(row=2, column=0)
         btn_register = ttk.Button(self, text="register")
         btn_register.grid(row=2, column=1)
-
-        
-
-        
 
 
 class MainView(ttk.Frame):
